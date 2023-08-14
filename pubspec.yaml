@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_map:
   latlong2:
+  mapbox_gl:
 
 dev_dependencies:
   flutter_test:
