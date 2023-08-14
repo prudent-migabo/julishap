@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "592596209044",
+    "project_id": "julishap-9f8ce",
+    "storage_bucket": "julishap-9f8ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592596209044:android:c86cfac8a129b6fc51d381",
+        "android_client_info": {
+          "package_name": "com.example.julishap_civil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592596209044-rl9m78naf2lche1eqr0usuju22iio0r7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDedeEfdViLmOHKEe97L00-p0SmOb43ImE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592596209044-rl9m78naf2lche1eqr0usuju22iio0r7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -38,6 +38,14 @@ dependencies:
   flutter_map:
   latlong2:
   mapbox_gl:
+  bloc:
+  flutter_bloc:
+  equatable:
+  location:
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+
 
 dev_dependencies:
   flutter_test:
