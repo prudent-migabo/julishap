@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/business_logic/cubits/auth_stream_cubit/auth_stream_cubit.dart';
+import 'package:julishap_civil/business_logic/cubits/auth_switch_cubit/auth_switch_cubit.dart';
 import 'package:julishap_civil/presentation/presentation.dart';
 
 class Wrapper extends StatefulWidget {
+  static const String routeName='/';
   const Wrapper({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +20,7 @@ class _WrapperState extends State<Wrapper> {
              if(state.streamStatus==AuthStreamStatus.authenticated){
                return HomeScreen();
              }
-            return BlocBuilder(
+            return BlocBuilder<AuthSwitchCubit,bool>(
                 builder: (context,state){
                   if(state==true){
                     return LoginScreen();

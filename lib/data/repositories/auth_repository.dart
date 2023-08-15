@@ -26,9 +26,11 @@ class AuthRepository{
      userModel.docId=user.user!.uid;
      await usersRef.doc(user.user?.uid).set(userModel.toMap());
    }on FirebaseAuthException catch(e){
+     print('ppppppppppppppp${e}');
      throw CustomError(code: e.code, message: e.message.toString(), plugin: e.plugin);
    }
    catch(e){
+     print('oooooooooooo${e}');
      throw CustomError(code: 'Exception', message: e.toString(), plugin: 'Exception/Plugin');
    }
   }

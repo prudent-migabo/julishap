@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
@@ -43,103 +45,114 @@ class RegisterScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Creer Compte'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Expanded(
-                  child:
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Nom',
-                            labelText: 'Nom',
-                          ),
-                            validator: (val){
-                              if(val!.isEmpty|| val.trim().isEmpty){
-                                return 'required';
-                              }
-                            }
-                        ),
-                        SizedBox(height: 8,),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Email',
-                            labelText: 'Email',
-                          ),
-                          validator: (val){
-                            if(val!.isEmpty|| val.trim().isEmpty){
-                              return 'required';
-                            }
-                            if(!val.contains('@')){
-                              return 'invalid email';
-                            }
-                          },
-                        ),
-                        SizedBox(height: 8,),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'phone Number',
-                            labelText: 'phone Number',
-                          ),
-                            validator: (val){
-                              if(val!.isEmpty|| val.trim().isEmpty){
-                                return 'required';
-                              }
-                            }
-                        ),
-                        SizedBox(height: 8,),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'password',
-                            labelText: 'password',
-                          ),
-                            validator: (val){
-                              if(val!.isEmpty|| val.trim().isEmpty){
-                                return 'required';
-                              }
-                              if(val.trim().length<6){
-                                return "too short";
-                              }
-                            }
-                        ),
-                        SizedBox(height: 8,),
+        body: LayoutBuilder(
+          builder: (context, constraints){
+            return SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: BoxConstraints.tightFor(height: max(500, constraints.maxHeight)),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child:
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextFormField(
+                                controller: _name,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Nom',
+                                    labelText: 'Nom',
+                                  ),
+                                  validator: (val){
+                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                      return 'required';
+                                    }
+                                  }
+                              ),
+                              SizedBox(height: 8,),
+                              TextFormField(
+                                controller: _email,
+                                decoration: const InputDecoration(
+                                  hintText: 'Email',
+                                  labelText: 'Email',
+                                ),
+                                validator: (val){
+                                  if(val!.isEmpty|| val.trim().isEmpty){
+                                    return 'required';
+                                  }
+                                  if(!val.contains('@')){
+                                    return 'invalid email';
+                                  }
+                                },
+                              ),
+                              SizedBox(height: 8,),
+                              TextFormField(
+                                  controller: _phoneNumber,
+                                  decoration: const InputDecoration(
+                                    hintText: 'phone Number',
+                                    labelText: 'phone Number',
+                                  ),
+                                  validator: (val){
+                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                      return 'required';
+                                    }
+                                  }
+                              ),
+                              SizedBox(height: 8,),
+                              TextFormField(
+                                  controller: _password,
+                                  decoration: const InputDecoration(
+                                    hintText: 'password',
+                                    labelText: 'password',
+                                  ),
+                                  validator: (val){
+                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                      return 'required';
+                                    }
+                                    if(val.trim().length<6){
+                                      return "too short";
+                                    }
+                                  }
+                              ),
+                              SizedBox(height: 8,),
 
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
-                            onPressed:state.status==AuthStatus.loading?null:(){
-                              _onSubmit(context);
-                            },
-                            child: Text(state.status==AuthStatus.loading?"loading...":'creer'))
-                      ],
-                    ),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
+                                  onPressed:state.status==AuthStatus.loading?null:(){
+                                    _onSubmit(context);
+                                  },
+                                  child: Text(state.status==AuthStatus.loading?"loading...":'creer'))
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Vous avez deja un compte :'),
+                          SizedBox(width: 8,),
+                          GestureDetector(
+                              onTap: (){
+                                context.read<AuthSwitchCubit>().toggle(true);
+                              },
+                              child: Text('Connectez Vous',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.bold),)),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Vous avez deja un compte :'),
-                    SizedBox(width: 8,),
-                    GestureDetector(
-                        onTap: (){
-                          context.read<AuthSwitchCubit>().toggle(true);
-                        },
-                        child: Text('Connectez Vous',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold),)),
-                  ],
-                )
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       );
     });

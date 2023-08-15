@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:julishap_civil/presentation/presentation.dart';
 import 'package:julishap_civil/presentation/screens/home_screen/home_screen.dart';
 
+import '../wrapper.dart';
+
 class AppRouter{
 
   static Route onGenerateRoute (RouteSettings settings){
 
     switch (settings.name){
+      case Wrapper.routeName:
+        return MaterialPageRoute(builder: (context)=>Wrapper());
       case CreateAlerteScreen.routeName:
         return MaterialPageRoute(builder: (context)=>CreateAlerteScreen());
       case HistoryScreen.routeName:

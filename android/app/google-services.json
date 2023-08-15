@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "592596209044",
-    "project_id": "julishap-9f8ce",
-    "storage_bucket": "julishap-9f8ce.appspot.com"
+    "project_number": "441344757160",
+    "project_id": "prudent-julishap",
+    "storage_bucket": "prudent-julishap.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:592596209044:android:c86cfac8a129b6fc51d381",
+        "mobilesdk_app_id": "1:441344757160:android:18979e76f5b377e9c0e19d",
         "android_client_info": {
           "package_name": "com.example.julishap_civil"
         }
       },
       "oauth_client": [
         {
-          "client_id": "592596209044-rl9m78naf2lche1eqr0usuju22iio0r7.apps.googleusercontent.com",
+          "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDedeEfdViLmOHKEe97L00-p0SmOb43ImE"
+          "current_key": "AIzaSyBnSbumxkrsnegQ8lpbMRCwGyYJI_EGGdg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "592596209044-rl9m78naf2lche1eqr0usuju22iio0r7.apps.googleusercontent.com",
+              "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "441344757160-nlkgne5joi6rho48kr7tsk1uig7scidf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.julishapCivil"
+              }
             }
           ]
         }

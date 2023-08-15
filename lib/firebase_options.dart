@@ -17,19 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -52,11 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCNJvyQVEBRuRmoGIg4vigA4jqjlGo4-fs',
+    appId: '1:441344757160:web:0a71296e42222883c0e19d',
+    messagingSenderId: '441344757160',
+    projectId: 'prudent-julishap',
+    authDomain: 'prudent-julishap.firebaseapp.com',
+    storageBucket: 'prudent-julishap.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDedeEfdViLmOHKEe97L00-p0SmOb43ImE',
-    appId: '1:592596209044:android:c86cfac8a129b6fc51d381',
-    messagingSenderId: '592596209044',
-    projectId: 'julishap-9f8ce',
-    storageBucket: 'julishap-9f8ce.appspot.com',
+    apiKey: 'AIzaSyBnSbumxkrsnegQ8lpbMRCwGyYJI_EGGdg',
+    appId: '1:441344757160:android:18979e76f5b377e9c0e19d',
+    messagingSenderId: '441344757160',
+    projectId: 'prudent-julishap',
+    storageBucket: 'prudent-julishap.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCq3CTFBbjRgFNVKc5Xpwv7dT-ds6dbodk',
+    appId: '1:441344757160:ios:53ace84c162ab4b1c0e19d',
+    messagingSenderId: '441344757160',
+    projectId: 'prudent-julishap',
+    storageBucket: 'prudent-julishap.appspot.com',
+    iosClientId: '441344757160-nlkgne5joi6rho48kr7tsk1uig7scidf.apps.googleusercontent.com',
+    iosBundleId: 'com.example.julishapCivil',
   );
 }

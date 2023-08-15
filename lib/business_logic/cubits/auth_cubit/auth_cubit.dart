@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:julishap_civil/data/data.dart';
+
+import '../../../data/data.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {

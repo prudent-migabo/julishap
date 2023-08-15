@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:julishap_civil/presentation/presentation.dart';
+
+import '../../presentation.dart';
 
 class CreateAlerteScreen extends StatefulWidget {
   static const String routeName= '/create-alert';

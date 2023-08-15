@@ -2,18 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/config/routes.dart';
 import 'package:julishap_civil/config/theming.dart';
 import 'package:julishap_civil/data/data.dart';
-import 'package:julishap_civil/firebase_options.dart';
-import 'package:julishap_civil/presentation/screens/home_screen/home_screen.dart';
+import 'package:julishap_civil/wrapper.dart';
+
+import 'business_logic/cubits/cubits.dart';
+
 
 
 Future<void> main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform);
+ await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -27,15 +27,15 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider<AuthRepository>(create: (context)=>AuthRepository(auth: FirebaseAuth.instance)),
         BlocProvider(create: (context)=>AuthCubit(authRepository: context.read<AuthRepository>())),
-        BlocProvider(create: (context)=>AuthStreamCubit(authRepository: context.read<AuthRepository>())),
-        BlocProvider(create: (context)=>AuthSwitchCubit()),
+        BlocProvider<AuthStreamCubit>(create: (context)=>AuthStreamCubit(authRepository: context.read<AuthRepository>())),
+        BlocProvider<AuthSwitchCubit>(create: (context)=>AuthSwitchCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Julishap',
         theme: AppThemeData.lightTheme,
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: HomeScreen.routeName,
+        initialRoute: Wrapper.routeName,
       ),
     );
   }
