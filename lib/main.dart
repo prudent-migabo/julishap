@@ -26,9 +26,12 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         RepositoryProvider<AuthRepository>(create: (context)=>AuthRepository(auth: FirebaseAuth.instance)),
+        RepositoryProvider(create: (context)=>AlertsRepository()),
         BlocProvider(create: (context)=>AuthCubit(authRepository: context.read<AuthRepository>())),
         BlocProvider<AuthStreamCubit>(create: (context)=>AuthStreamCubit(authRepository: context.read<AuthRepository>())),
         BlocProvider<AuthSwitchCubit>(create: (context)=>AuthSwitchCubit()),
+        BlocProvider(create: (context)=>AlertsCubit(alertsRepository: context.read<AlertsRepository>(),
+            uid: context.watch<AuthStreamCubit>().state.uid))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

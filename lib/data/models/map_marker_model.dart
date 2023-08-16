@@ -1,21 +1,20 @@
-// import 'package:latlong2/latlong.dart';
-//
-// class MapMarker {
-//   final String? image;
-//   final String? title;
-//   final String? address;
-//   final LatLng? location;
-//   final int? rating;
-//
-//   MapMarker({
-//     required this.image,
-//     required this.title,
-//     required this.address,
-//     required this.location,
-//     required this.rating,
-//   });
-// }
-//
+import 'package:flutter/cupertino.dart';
+import 'package:latlong2/latlong.dart';
+
+class MapMarker {
+  final String? image;
+  final IconData? icon;
+  final String? address;
+  final LatLng? location;
+
+  MapMarker({
+    this.icon,
+    this.image,
+    required this.address,
+    required this.location,
+  });
+}
+
 // final mapMarkers = [
 //   MapMarker(
 //       image: 'assets/images/restaurant_1.jpg',

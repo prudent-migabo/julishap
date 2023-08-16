@@ -16,10 +16,16 @@ class AuthStreamCubit extends Cubit<AuthStreamState> {
 
   void onChanged(User? user){
      if(user!=null){
-       emit(state.copyWith(streamStatus: AuthStreamStatus.authenticated));
+       emit(state.copyWith(streamStatus: AuthStreamStatus.authenticated,uid: user.uid));
      }
      else{
-       emit(state.copyWith(streamStatus: AuthStreamStatus.unauthenticated));
+       emit(state.copyWith(streamStatus: AuthStreamStatus.unauthenticated, uid: ''));
      }
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription!.cancel();
+    return super.close();
   }
 }
