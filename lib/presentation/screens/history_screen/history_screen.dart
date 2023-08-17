@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../business_logic/cubits/cubits.dart';
+import '../../../data/data.dart';
 
 class HistoryScreen extends StatelessWidget {
   static const String routeName= '/history';
@@ -15,27 +16,24 @@ class HistoryScreen extends StatelessWidget {
 
         },
         builder: (context, state){
-          if(state.status==AlertsStatus.loading){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          else if(state.status==AlertsStatus.success){
-            return ListView.builder(
-                itemBuilder: (
-                    context, index){
-                  return ListTile(
-                    title: Text('Vol'),
-                    subtitle: Text('19-12-2023 12:10'),
-                    trailing: Text('received'),
-                  );
-                },
-                itemCount: state.historyAlerts.length);
 
-          }
-          return Center(
+          return state.notificationAlerts.length==0?
+          Center(
             child: Text('Empty'),
-          );
+          )
+              :ListView.builder(
+              itemBuilder: (
+                  context, index){
+                AlertModel alert= state.historyAlerts[index];
+
+                return ListTile(
+                  title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
+                  subtitle: Text(alert.date),
+                  trailing: Text(alert.status,
+                    style: TextStyle(color: Colors.green),),
+                );
+              },
+              itemCount: state.historyAlerts.length);
         });
   }
 }

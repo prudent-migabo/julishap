@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/data/data.dart';
 import 'package:julishap_civil/utils/error_dialog.dart';
@@ -35,6 +36,10 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
       listener: (context, state){
         if(state.status== AlertsStatus.error){
           errorDialog(context, state.customError!);
+        }
+        if(state.status==AlertsStatus.success){
+           Fluttertoast.showToast(msg: 'creer avec success aller a la notification',
+               backgroundColor: Colors.green, toastLength: Toast.LENGTH_SHORT,textColor: Colors.white);
         }
       },
       builder: (context, state){

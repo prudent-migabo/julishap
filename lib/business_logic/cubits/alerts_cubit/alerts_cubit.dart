@@ -11,6 +11,7 @@ class AlertsCubit extends Cubit<AlertsState> {
   AlertsRepository alertsRepository;
   String  uid;
   AlertsCubit({required this.alertsRepository,required this.uid}) : super(AlertsState.initial()){
+    print('ccccccccccc${uid}');
     _notificationAlertsStream=alertsRepository.notificationAlerts(uid).listen((alerts) {
       getNotificationsAlerts(alerts);
     });

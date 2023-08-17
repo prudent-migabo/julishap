@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
+import 'package:julishap_civil/data/data.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const String routeName= '/notification';
@@ -14,27 +15,25 @@ class NotificationScreen extends StatelessWidget {
 
       },
         builder: (context, state){
-        if(state.status==AlertsStatus.loading){
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        else if(state.status==AlertsStatus.success){
-          return ListView.builder(
-              itemBuilder: (
-                  context, index){
-                return ListTile(
-                  title: Text('Vol'),
-                  subtitle: Text('19-12-2023 12:10'),
-                  trailing: Text('received'),
-                );
-              },
-              itemCount: state.notificationAlerts.length);
 
-        }
-        return Center(
-          child: Text('Empty'),
-        );
-    });
+        return  state.notificationAlerts.length==0?
+            Center(
+              child: Text('Empty'),
+            )
+            :ListView.builder(
+            itemBuilder: (
+                context, index){
+              AlertModel alert= state.notificationAlerts[index];
+
+              return ListTile(
+                title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
+                subtitle: Text(alert.date),
+                trailing: Text(alert.status,
+                  style: TextStyle(color: alert.status=='accepted'?Colors.green:Colors.grey),),
+              );
+            },
+            itemCount: state.notificationAlerts.length);
+
+        });
   }
 }

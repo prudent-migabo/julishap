@@ -10,7 +10,7 @@ import '../wrapper.dart';
 class AppRouter{
 
   static Route onGenerateRoute (RouteSettings settings){
-     final data= settings.arguments as Map;
+     final data= settings.arguments==null?{}:settings.arguments as Map;
     switch (settings.name){
       case Wrapper.routeName:
         return MaterialPageRoute(builder: (context)=>Wrapper());
