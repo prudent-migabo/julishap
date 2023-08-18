@@ -7,12 +7,12 @@ class AlertsRepository{
 
   Stream<List<AlertModel>> notificationAlerts(String uid){
     return alertsRef.where('status', isNotEqualTo: 'completed').where('uid',isEqualTo: uid)
-        .snapshots().map((snap) =>snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
+        .snapshots().map((snap) =>snap.docs.map((doc) =>AlertModel.fromMap(doc)).toList());
   }
 
   Stream<List<AlertModel>> historyAlerts(String uid){
     return alertsRef.where('status', isEqualTo: 'completed').where('uid',isEqualTo: uid)
-        .snapshots().map((snap) => snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
+        .snapshots().map((snap) => snap.docs.map((doc) => AlertModel.fromMap(doc)).toList());
   }
 
   Future sendAnAlert(AlertModel alertModel)async{

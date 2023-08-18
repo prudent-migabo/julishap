@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "441344757160",
+    "project_id": "prudent-julishap",
+    "storage_bucket": "prudent-julishap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441344757160:android:18979e76f5b377e9c0e19d",
+        "android_client_info": {
+          "package_name": "com.example.julishap_civil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnSbumxkrsnegQ8lpbMRCwGyYJI_EGGdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "441344757160-nlkgne5joi6rho48kr7tsk1uig7scidf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.julishapCivil"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441344757160:android:bd0a04e0e629a793c0e19d",
+        "android_client_info": {
+          "package_name": "com.example.julishap_police"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnSbumxkrsnegQ8lpbMRCwGyYJI_EGGdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441344757160-r6lc17tviis6c77obuumjvkr3rhvacao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "441344757160-nlkgne5joi6rho48kr7tsk1uig7scidf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.julishapCivil"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

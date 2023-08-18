@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:julishap_civil/presentation/screens/create_alert_screen/create_alert_screen.dart';
+import 'package:julishap_civil/presentation/presentation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-
 import '../../../config/map_config.dart';
-import '../../../data/data.dart';
 
 class MapScreen extends StatefulWidget {
   static const String routeName= '/map';

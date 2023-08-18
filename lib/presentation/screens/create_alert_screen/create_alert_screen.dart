@@ -76,6 +76,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                   style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
                   onPressed: state.status==AlertsStatus.loading?null:(){
                     context.read<AlertsCubit>().sendAlert(AlertModel(
+                        senderName: '',
                         uid: context.read<AuthStreamCubit>().state.uid,
                         location: GeoPoint(widget.location.latitude,widget.location.longitude),
                         reason: alertName,
