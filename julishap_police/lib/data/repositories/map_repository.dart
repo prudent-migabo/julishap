@@ -13,8 +13,8 @@ class MapRepository{
 
       dynamic data= await Services.get('https://api.mapbox.com/directions/v5/mapbox/driving/${origin.longitude}%2C${origin.latitude}%3B${destination.longitude}%2C${destination.latitude}?annotations=distance%2Cduration&overview=full&geometries=geojson&access_token=${MapConfig.mapBoxAccessToken}');
        print('vvvvvvv${data}');
-       return data;
-    }on CustomError catch (e){
+       return await DirectionModel.fromMap(data);
+    }on CustomError{
        rethrow;
     }
 

@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        RepositoryProvider<MapRepository>(create: (context)=>MapRepository()),
         RepositoryProvider<AuthRepository>(create: (context)=>AuthRepository(auth: FirebaseAuth.instance)),
         RepositoryProvider(create: (context)=>AlertsRepository()),
         BlocProvider(create: (context)=>AuthCubit(authRepository: context.read<AuthRepository>())),

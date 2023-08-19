@@ -20,6 +20,7 @@ class _MapScreenState extends State<MapScreen> {
 
   late LocationData _locationData;
   List<Marker> markers=[];
+  List<Polyline> polylines=[];
 
 
   @override
@@ -65,100 +66,138 @@ class _MapScreenState extends State<MapScreen> {
     }
 
     _locationData = await location.getLocation();
-   dynamic data= await MapRepository().getDirection(LatLng(_locationData.latitude!, _locationData.longitude!),
+   DirectionModel data= await MapRepository().getDirection(LatLng(_locationData.latitude!, _locationData.longitude!),
        LatLng(widget.alert.location.latitude, widget.alert.location.longitude));
    print('uuuuuuuuuuuu${data}');
-    mapController.move(LatLng(_locationData.latitude!,_locationData.longitude!), 20);
+
+   List<LatLng> points=[];
+   for(List point in data.coordinates){
+     points.add(LatLng(point[1], point[0]));
+   }
+
+
 
 
     setState(() {
-       markers.add(
-           Marker(point: LatLng(_locationData.latitude!,_locationData.longitude!),
-           builder: (context){
-             return Icon(Icons.location_on, color: Colors.red,);
-           }));
-    });
+      polylines.add(Polyline(points: points,strokeWidth: 3,color: Colors.red));
 
+      markers.add(
+          Marker(
+              point: LatLng(_locationData.latitude!,_locationData.longitude!),
+              builder: (context){
+                return Icon(Icons.location_on, color: Colors.red,);
+              }));
+
+       markers.add(
+           Marker(
+               point: LatLng(widget.alert.location.latitude!,widget.alert.location.longitude!),
+           builder: (context){
+             return Icon(Icons.location_on, color: Colors.yellow,);
+           }));
+
+      print('oooooooooooo${Polyline(points: points)}');
+
+
+
+
+    });
+   mapController.move(LatLng(_locationData.latitude!, _locationData.longitude!), 20);
+
+    mapController.centerZoomFitBounds(LatLngBounds(
+        LatLng(_locationData.latitude!, _locationData.longitude!),
+        LatLng(widget.alert.location.latitude, widget.alert.location.longitude)));
+    
   }
 
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Container(
-            color:Colors.red,
-            width: double.infinity,
-            height: double.infinity,
-            child: FlutterMap(
-              mapController: mapController,
-              options: MapOptions(
-                minZoom: 5,
-                maxZoom: 18,
-                zoom: 13,
-                center: MapConfig.myLocation,
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: MapConfig.mapUrl,
-                  additionalOptions: {
-                    'mapStyleId': MapConfig.mapBoxStyleId,
-                    'accessToken': MapConfig.mapBoxAccessToken,
-                  },
-                ),
-                MarkerLayer(markers: markers,),
-              ],
-            )
-          ),
-
-          Positioned(
-            top: 15,
-              right: 15,
-              child:
-              GestureDetector(
-                onTap: (){
-                  mapController.move(LatLng(_locationData.latitude!,_locationData.longitude!), 20);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(3)
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Alerte chez ${widget.alert.senderName}'),
+      ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Container(
+                color:Colors.red,
+                width: double.infinity,
+                height: double.infinity,
+                child: FlutterMap(
+                  mapController: mapController,
+                  options: MapOptions(
+                    minZoom: 5,
+                    maxZoom: 18,
+                    zoom: 13,
+                    center: MapConfig.myLocation,
                   ),
-                  child:
-                  Icon(Icons.my_location_outlined,color: Colors.white,),
-                ),
-              )
-          ),
-
-
-          Positioned(
-            bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.only(left: 15, right: 15,bottom: 20),
-                child: Row(
                   children: [
-                    ElevatedButton(
-                        onPressed: (){},
-                        child: Text('Accepter')),
-                    SizedBox(width: 10,),
-                    OutlinedButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                        child: Text('decliner')),
+                    TileLayer(
+                      urlTemplate: MapConfig.mapUrl,
+                      additionalOptions: {
+                        'mapStyleId': MapConfig.mapBoxStyleId,
+                        'accessToken': MapConfig.mapBoxAccessToken,
+                      },
+                    ),
+                    MarkerLayer(markers: markers,),
+                    PolylineLayer(polylines: polylines,)
                   ],
                 )
-              ))
+            ),
 
-        ],
+            Positioned(
+                top: 15,
+                right: 15,
+                child:
+                GestureDetector(
+                  onTap: (){
+                    mapController.move(LatLng(_locationData.latitude!,_locationData.longitude!), 20);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(3)
+                    ),
+                    child:
+                    Icon(Icons.my_location_outlined,color: Colors.white,),
+                  ),
+                )
+            ),
+
+
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: Colors.white,
+                    padding: const EdgeInsets.only(left: 15, right: 15,bottom: 20,top: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                              onPressed: (){},
+                              child: Text('Accepter')),
+                        ),
+                        SizedBox(width: 10,),
+                        Expanded(
+                          child: OutlinedButton(
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text('decliner')),
+                        ),
+                      ],
+                    )
+                ))
+
+          ],
+        ),
       ),
     );
   }

@@ -15,15 +15,15 @@ class Services{
       if(response.statusCode! >= 400){
         throw CustomError(code: 'Error', message: response.data.toString(), plugin: '');
       }
-      print('rrrrrrr${response}');
+      print('rrrrrrr${response.data}');
 
-      dynamic data= json.decode(response.data);
-
-      return data;
+      return response.data;
 
     }catch(e){
+      print('iiiiiiiii${e}');
       throw CustomError(code: 'Error', message: e.toString(), plugin: '');
 
     }
   }
 }
+
