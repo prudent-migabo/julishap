@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:julishap_police/data/data.dart';
 import 'package:julishap_police/presentation/presentation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import '../../../business_logic/cubits/cubits.dart';
 import '../../../config/map_config.dart';
+import '../../../utils/utils.dart';
 
 class MapScreen extends StatefulWidget {
   static const String routeName= '/map';
@@ -75,9 +79,8 @@ class _MapScreenState extends State<MapScreen> {
      points.add(LatLng(point[1], point[0]));
    }
 
-
-
-
+    markers.clear();
+   polylines.clear();
     setState(() {
       polylines.add(Polyline(points: points,strokeWidth: 3,color: Colors.red));
 
@@ -95,17 +98,19 @@ class _MapScreenState extends State<MapScreen> {
              return Icon(Icons.location_on, color: Colors.yellow,);
            }));
 
-      print('oooooooooooo${Polyline(points: points)}');
+      print('oooooooooooo${_locationData.latitude!},${_locationData.longitude!}oooooo${widget.alert.location.latitude!},${widget.alert.location.longitude!}');
 
 
 
 
     });
-   mapController.move(LatLng(_locationData.latitude!, _locationData.longitude!), 20);
+   mapController.move(LatLng(_locationData.latitude!, _locationData.longitude!), 16);
 
-    mapController.centerZoomFitBounds(LatLngBounds(
-        LatLng(_locationData.latitude!, _locationData.longitude!),
-        LatLng(widget.alert.location.latitude, widget.alert.location.longitude)));
+   setState(() {
+     mapController.centerZoomFitBounds(LatLngBounds(
+         LatLng(_locationData.latitude!, _locationData.longitude!),
+         LatLng(widget.alert.location.latitude, widget.alert.location.longitude)));
+   });
     
   }
 
@@ -174,27 +179,90 @@ class _MapScreenState extends State<MapScreen> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Container(
-                  color: Colors.white,
-                    padding: const EdgeInsets.only(left: 15, right: 15,bottom: 20,top: 20),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                              onPressed: (){},
-                              child: Text('Accepter')),
-                        ),
-                        SizedBox(width: 10,),
-                        Expanded(
-                          child: OutlinedButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              },
-                              child: Text('decliner')),
-                        ),
-                      ],
-                    )
-                ))
+                child: BlocConsumer<AlertsCubit, AlertsState>(
+                  listener: (context,state){
+                    if(state.status==AlertsStatus.error){
+                      errorDialog(context, state.customError!);
+                    }
+                  },
+                  builder: (context,state){
+                    AlertModel alert=state.notificationAlerts.firstWhere((alert) => widget.alert.docId==alert.docId);
+                    if(state.status==AlertsStatus.loading){
+                      return Center(child: Text('loading...'));
+                    }
+                  return Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.only(left: 15, right: 15,bottom: 20,top: 20),
+                      child:
+                          alert.status=='accepted'?
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: Text('Acceptee par ${alert.policeName}')
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: (){
+
+                                  }, child: Text('decliner'))
+                                ],
+                              )
+                              :
+                          alert.status=='declined'?
+
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Text('declinee par ${alert.policeName}')
+                              ),
+                              // ElevatedButton(
+                              //     onPressed: (){
+                              //
+                              //     }, child: Text('decliner'))
+                            ],
+                          )
+                              :
+
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                                onPressed: (){
+                                  context.read<AlertsCubit>().updateAlert(AlertModel(
+                                    status: 'accepted', uid: '',
+                                    location: GeoPoint(0,0),
+                                    reason: '',
+                                    date: '',
+                                    senderName: '',
+                                    docId: alert.docId,
+                                    policeIntialLocation: GeoPoint(_locationData.latitude!,_locationData.longitude!)
+                                  ));
+                                },
+                                child: Text('Accepter')),
+                          ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: (){
+                                  context.read<AlertsCubit>().updateAlert(AlertModel(
+                                    status: 'declined',
+                                      uid: '',
+                                    location: GeoPoint(0,0),
+                                    reason: '',
+                                    date: '',
+                                    senderName: '',
+                                    docId: alert.docId,
+                                    policeIntialLocation: GeoPoint(_locationData.latitude!,_locationData.longitude!)
+                                  ));
+                                  Navigator.pop(context);
+                                },
+                                child: Text('decliner')),
+                          ),
+                        ],
+                      )
+                  );
+                },),
+            )
 
           ],
         ),

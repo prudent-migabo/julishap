@@ -10,7 +10,8 @@ part 'alerts_state.dart';
 class AlertsCubit extends Cubit<AlertsState> {
   AlertsRepository alertsRepository;
   String  uid;
-  AlertsCubit({required this.alertsRepository,required this.uid}) : super(AlertsState.initial()){
+  AuthRepository authRepository;
+  AlertsCubit({required this.alertsRepository,required this.uid, required this.authRepository}) : super(AlertsState.initial()){
     print('ccccccccccc${uid}');
     _notificationAlertsStream=alertsRepository.notificationAlerts(uid).listen((alerts) {
       getNotificationsAlerts(alerts);
@@ -39,10 +40,14 @@ class AlertsCubit extends Cubit<AlertsState> {
     emit(state.copyWith(declinedAlerts: alerts));
   }
 
-  void sendAlert(AlertModel alertModel)async{
+  void updateAlert(AlertModel alertModel)async{
     try{
       emit(state.copyWith(status: AlertsStatus.loading));
-       await alertsRepository.sendAnAlert(alertModel);
+      UserModel userModel=await authRepository.getUserDetails(uid);
+      alertModel.policeName=userModel.name;
+      alertModel.policeId=uid;
+      print('vvvvvvvvvvvvvvvvv${alertModel}');
+       await alertsRepository.updateAlert(alertModel);
       emit(state.copyWith(status: AlertsStatus.success));
     }on CustomError catch(e){
       emit(state.copyWith(customError: e));

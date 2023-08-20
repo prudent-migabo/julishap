@@ -6,7 +6,7 @@ import '../../utils/constants.dart';
 class AlertsRepository{
 
   Stream<List<AlertModel>> notificationAlerts(String uid){
-    return alertsRef.where('status', isEqualTo: 'pending')
+    return alertsRef.where('status', isNotEqualTo: 'completed')
         .snapshots().map((snap) =>snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
   }
 
@@ -20,9 +20,9 @@ class AlertsRepository{
         .snapshots().map((snap) => snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
   }
 
-  Future sendAnAlert(AlertModel alertModel)async{
+  Future updateAlert(AlertModel alertModel)async{
     try{
-     await alertsRef.add(alertModel.toMap());
+     await alertsRef.doc(alertModel.docId).set(alertModel.toUpdate(),SetOptions(merge: true));
     }on FirebaseException catch(e){
       throw CustomError(code: e.code, message: e.message.toString(), plugin: e.plugin);
     }catch(e){
