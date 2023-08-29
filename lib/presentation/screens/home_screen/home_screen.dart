@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/presentation/presentation.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,6 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: (){
+            context.read<AuthCubit>().signOut();
+          }, icon: Icon(Icons.logout))
+        ],
         title: const Text('HOME'),
       ),
       drawer: const DrawerWidget(),
@@ -38,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onChangeIndex,
+        selectedItemColor: Theme.of(context).primaryColor,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: false,

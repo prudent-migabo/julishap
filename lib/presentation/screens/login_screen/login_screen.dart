@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
       builder: (context, state){
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Se Connecter'),
         ),
         body: Container(
@@ -63,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 12,),
                       TextFormField(
+                        obscureText: true,
                         controller: _password,
                         decoration: const InputDecoration(
                           isDense:true,
@@ -82,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                           onPressed: state.status==AuthStatus.loading?null:(){
                             _onSubmit(context);
                           },
-                          child: Text(state.status==AuthStatus.loading?"loading...":'se connecter')),
+                          child: Text(state.status==AuthStatus.loading?"Loading...":'Se connecter')),
 
                     ],
                   ),
@@ -90,7 +92,7 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Aucun Compte :'),
+                  Text('Aucun Compte ?'),
                   SizedBox(width: 8,),
                   GestureDetector(
                       onTap: (){

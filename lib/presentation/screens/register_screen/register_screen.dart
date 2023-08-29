@@ -95,8 +95,8 @@ class RegisterScreen extends StatelessWidget {
                               TextFormField(
                                   controller: _phoneNumber,
                                   decoration: const InputDecoration(
-                                    hintText: 'phone Number',
-                                    labelText: 'phone Number',
+                                    hintText: 'Phone Number',
+                                    labelText: 'Phone Number',
                                   ),
                                   validator: (val){
                                     if(val!.isEmpty|| val.trim().isEmpty){
@@ -106,10 +106,11 @@ class RegisterScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 8,),
                               TextFormField(
+                                obscureText: true,
                                   controller: _password,
                                   decoration: const InputDecoration(
-                                    hintText: 'password',
-                                    labelText: 'password',
+                                    hintText: 'Password',
+                                    labelText: 'Password',
                                   ),
                                   validator: (val){
                                     if(val!.isEmpty|| val.trim().isEmpty){
@@ -127,7 +128,7 @@ class RegisterScreen extends StatelessWidget {
                                   onPressed:state.status==AuthStatus.loading?null:(){
                                     _onSubmit(context);
                                   },
-                                  child: Text(state.status==AuthStatus.loading?"loading...":'creer'))
+                                  child: Text(state.status==AuthStatus.loading?"Loading...":'Creer'))
                             ],
                           ),
                         ),

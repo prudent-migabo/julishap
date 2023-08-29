@@ -20,7 +20,7 @@ class CreateAlerteScreen extends StatefulWidget {
 
 class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
 
-  List<String> alerts=["Vol","Kidnapping","viol", "tentative de Meurtre"," Abus"];
+  List<String> alerts=["Vol","Kidnapping","Viol", "Tentative de Meurtre"," Abus"];
   String alertName='Vol';
 
 
@@ -64,7 +64,8 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
               SizedBox(height: 10,),
 
               DropdownButtonFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: 2),
                     isDense:true,
                   ),
                   value: alertName,
@@ -83,7 +84,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                         status: 'pending',
                         date: DateTime.now().toIso8601String()));
                   }
-                  , child: Text(state.status==AlertsStatus.loading?'loading...':'Envoyer'))
+                  , child: Text(state.status==AlertsStatus.loading?'Loading...':'Envoyer'))
 
             ],
           ),
