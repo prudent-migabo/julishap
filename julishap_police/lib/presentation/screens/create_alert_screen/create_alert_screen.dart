@@ -45,6 +45,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
       builder: (context, state){
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Creer Alerte'),
         ),
         body: Padding(

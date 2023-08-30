@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('HOME'),
       ),
       drawer: const DrawerWidget(),
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: false,
+        selectedItemColor: Theme.of(context).primaryColor,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notification"),

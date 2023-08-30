@@ -20,7 +20,10 @@ class HistoryScreen extends StatelessWidget {
           const Center(
             child: Text('Empty'),
           )
-              :ListView.builder(
+              :ListView.separated(
+              separatorBuilder: (context, index){
+                return SizedBox(height: 5,);
+              },
               itemBuilder: (
                   context, index){
                 AlertModel alert= state.historyAlerts[index];
@@ -28,7 +31,7 @@ class HistoryScreen extends StatelessWidget {
                 return ListTile(
                   title: Text(alert.reason,style: const TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text('Chez ${alert.senderName} le ${alert.date}'),
-                  trailing: Text(alert.status,
+                  trailing: Text(alert.status=='completed'?'completée':"inconnu",
                     style: TextStyle(color: Colors.green),),
                 );
               },

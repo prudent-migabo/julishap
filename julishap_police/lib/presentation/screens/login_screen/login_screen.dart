@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
       builder: (context, state){
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Se Connecter'),
         ),
         body: Container(
@@ -63,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 12,),
                       TextFormField(
+                        obscureText: true,
                         controller: _password,
                         decoration: const InputDecoration(
                           isDense:true,

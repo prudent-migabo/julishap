@@ -21,7 +21,11 @@ class NotificationScreen extends StatelessWidget {
             Center(
               child: Text('Empty'),
             )
-            :ListView.builder(
+            :ListView.separated(
+          padding: EdgeInsets.only(left: 20, right: 20,top: 15),
+              separatorBuilder: (context, index){
+                return SizedBox(height: 5,);
+              },
             itemBuilder: (
                 context, index){
               AlertModel alert= state.notificationAlerts[index];
@@ -31,10 +35,17 @@ class NotificationScreen extends StatelessWidget {
                   Navigator.pushNamed(context, MapScreen.routeName,arguments: alert);
                 },
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
                   title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text('Chez ${alert.senderName} le ${alert.date}'),
-                  trailing: Text(alert.status,
-                    style: TextStyle(color: alert.status=='accepted'?Colors.green:Colors.grey),),
+                  trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
+                    style: TextStyle(
+                        color: alert.status=='accepted'?
+                        Colors.green:
+                    alert.status=='declined'?
+                    Colors.redAccent.shade200:
+                    Colors.grey),
+                  ),
                 ),
               );
             },

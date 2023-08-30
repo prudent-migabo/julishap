@@ -43,6 +43,7 @@ class RegisterScreen extends StatelessWidget {
         builder: (context, state){
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text('Creer Compte'),
         ),
         body: LayoutBuilder(
@@ -106,6 +107,7 @@ class RegisterScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 8,),
                               TextFormField(
+                                  obscureText: true,
                                   controller: _password,
                                   decoration: const InputDecoration(
                                     hintText: 'password',

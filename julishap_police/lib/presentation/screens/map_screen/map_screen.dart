@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:julishap_police/data/data.dart';
 import 'package:julishap_police/presentation/presentation.dart';
 import 'package:latlong2/latlong.dart';
@@ -25,6 +26,7 @@ class _MapScreenState extends State<MapScreen> {
   late LocationData _locationData;
   List<Marker> markers=[];
   List<Polyline> polylines=[];
+  DirectionModel? directionModel;
 
 
   @override
@@ -86,7 +88,7 @@ class _MapScreenState extends State<MapScreen> {
 
       markers.add(
           Marker(
-              point: LatLng(_locationData.latitude!,_locationData.longitude!),
+        point: LatLng(_locationData.latitude!,_locationData.longitude!),
               builder: (context){
                 return Icon(Icons.location_on, color: Colors.red,);
               }));
@@ -110,7 +112,27 @@ class _MapScreenState extends State<MapScreen> {
      mapController.centerZoomFitBounds(LatLngBounds(
          LatLng(_locationData.latitude!, _locationData.longitude!),
          LatLng(widget.alert.location.latitude, widget.alert.location.longitude)));
+     directionModel=data;
+
    });
+
+    // location.onLocationChanged.listen((LocationData currentLocation) {
+    //   int index= markers.indexWhere((element) => element.key==const Key('live pin'));
+    //   markers.removeAt(index);
+    //
+    //   setState(() {
+    //
+    //     markers.add(
+    //         Marker(
+    //             key: const Key('live pin'),
+    //             point: LatLng(currentLocation.latitude!,currentLocation.longitude!),
+    //             builder: (context){
+    //               return Icon(Icons.location_on, color: Colors.blue,);
+    //             }));
+    //
+    //   });
+    // });
+
     
   }
 
@@ -149,10 +171,33 @@ class _MapScreenState extends State<MapScreen> {
                       },
                     ),
                     MarkerLayer(markers: markers,),
-                    PolylineLayer(polylines: polylines,)
+                    PolylineLayer(polylines: polylines,),
+                    CurrentLocationLayer()
                   ],
                 )
             ),
+
+            Positioned(
+              top: 10,
+                left: 10,
+                child: Container(
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      child: Row(
+                        children: [
+                          Text('Distance :'),
+                          Text(directionModel?.distance.toStringAsFixed(1)??'',style: TextStyle(fontWeight: FontWeight.bold),),
+                          const Text('m'),
+                          SizedBox(width: 20,),
+                          Text('Temps :'),
+                          Text(directionModel?.duration.toStringAsFixed(1)??'',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text('sec'),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
 
             Positioned(
                 top: 15,

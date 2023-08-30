@@ -10,7 +10,7 @@ class DashBoardScreen extends StatelessWidget {
     return Scaffold(
 
       body: ListView(
-        padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 15),
         children: [
           const Row(
             children: [
@@ -26,6 +26,7 @@ class DashBoardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20,),
           const Text('Notifications Recentes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+          SizedBox(height: 8,),
           RecentNofication()
         ],
       ),
