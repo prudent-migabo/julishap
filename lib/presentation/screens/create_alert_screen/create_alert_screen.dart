@@ -65,7 +65,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
 
               DropdownButtonFormField(
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 2),
+                    contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
                     isDense:true,
                   ),
                   value: alertName,
@@ -74,7 +74,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                       child: Text(e))).toList(), onChanged: onChangeAlert),
               SizedBox(height: 10,),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
+                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 16)),
                   onPressed: state.status==AlertsStatus.loading?null:(){
                     context.read<AlertsCubit>().sendAlert(AlertModel(
                         senderName: '',

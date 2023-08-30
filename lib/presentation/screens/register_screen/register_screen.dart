@@ -43,6 +43,7 @@ class RegisterScreen extends StatelessWidget {
         builder: (context, state){
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text('Creer Compte'),
         ),
         body: LayoutBuilder(
