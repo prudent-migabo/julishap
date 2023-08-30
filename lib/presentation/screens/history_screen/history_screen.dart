@@ -29,7 +29,7 @@ class HistoryScreen extends StatelessWidget {
                 return ListTile(
                   title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text(alert.date),
-                  trailing: Text(alert.status,
+                  trailing: Text(alert.status=='completed'?'completée':"inconnu",
                     style: TextStyle(color: Colors.green),),
                 );
               },
