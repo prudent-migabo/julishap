@@ -7,6 +7,7 @@ class AlertModel{
   String reason;
   String status;
   String date;
+  String senderName;
 
 //<editor-fold desc="Data Methods">
   AlertModel({
@@ -15,6 +16,7 @@ class AlertModel{
     required this.reason,
     required this.status,
     required this.date,
+    required this.senderName,
   });
 
   @override
@@ -26,7 +28,8 @@ class AlertModel{
           location == other.location &&
           reason == other.reason &&
           status == other.status &&
-          date == other.date);
+          date == other.date &&
+          senderName == other.senderName);
 
   @override
   int get hashCode =>
@@ -34,7 +37,8 @@ class AlertModel{
       location.hashCode ^
       reason.hashCode ^
       status.hashCode ^
-      date.hashCode;
+      date.hashCode ^
+      senderName.hashCode;
 
   @override
   String toString() {
@@ -44,6 +48,7 @@ class AlertModel{
         ' reason: $reason,' +
         ' status: $status,' +
         ' date: $date,' +
+        ' senderName: $senderName,' +
         '}';
   }
 
@@ -53,6 +58,7 @@ class AlertModel{
     String? reason,
     String? status,
     String? date,
+    String? senderName,
   }) {
     return AlertModel(
       uid: uid ?? this.uid,
@@ -60,6 +66,7 @@ class AlertModel{
       reason: reason ?? this.reason,
       status: status ?? this.status,
       date: date ?? this.date,
+      senderName: senderName ?? this.senderName,
     );
   }
 
@@ -70,10 +77,11 @@ class AlertModel{
       'reason': this.reason,
       'status': this.status,
       'date': this.date,
+      'senderName': this.senderName,
     };
   }
 
-  factory AlertModel.fromDoc(DocumentSnapshot doc) {
+  factory AlertModel.fromMap(DocumentSnapshot doc) {
     final map= doc.data() as Map;
 
     return AlertModel(
@@ -82,6 +90,7 @@ class AlertModel{
       reason: map['reason'] as String,
       status: map['status'] as String,
       date: map['date'] as String,
+      senderName: map['senderName'] as String,
     );
   }
 

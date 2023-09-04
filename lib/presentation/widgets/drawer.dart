@@ -22,7 +22,7 @@ class DrawerWidget extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('parametres'),
+            title: Text('Parametres'),
           ),
           ListTile(
             leading: Icon(Icons.language),
@@ -30,7 +30,7 @@ class DrawerWidget extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.sunny_snowing),
-            title: Text('theme'),
+            title: Text('Theme'),
           ),
 
         ],

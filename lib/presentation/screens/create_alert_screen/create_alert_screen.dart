@@ -20,7 +20,7 @@ class CreateAlerteScreen extends StatefulWidget {
 
 class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
 
-  List<String> alerts=["Vol","Kidnapping","viol", "tentative de Meurtre"," Abus"];
+  List<String> alerts=["Vol","Kidnapping","Viol", "Tentative de Meurtre"," Abus"];
   String alertName='Vol';
 
 
@@ -64,7 +64,8 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
               SizedBox(height: 10,),
 
               DropdownButtonFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
                     isDense:true,
                   ),
                   value: alertName,
@@ -73,16 +74,17 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                       child: Text(e))).toList(), onChanged: onChangeAlert),
               SizedBox(height: 10,),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
+                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 16)),
                   onPressed: state.status==AlertsStatus.loading?null:(){
                     context.read<AlertsCubit>().sendAlert(AlertModel(
+                        senderName: '',
                         uid: context.read<AuthStreamCubit>().state.uid,
                         location: GeoPoint(widget.location.latitude,widget.location.longitude),
                         reason: alertName,
                         status: 'pending',
                         date: DateTime.now().toIso8601String()));
                   }
-                  , child: Text(state.status==AlertsStatus.loading?'loading...':'Envoyer'))
+                  , child: Text(state.status==AlertsStatus.loading?'Loading...':'Envoyer'))
 
             ],
           ),

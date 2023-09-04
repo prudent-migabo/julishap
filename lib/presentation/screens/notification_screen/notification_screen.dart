@@ -28,7 +28,7 @@ class NotificationScreen extends StatelessWidget {
               return ListTile(
                 title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
                 subtitle: Text(alert.date),
-                trailing: Text(alert.status,
+                trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
                   style: TextStyle(color: alert.status=='accepted'?Colors.green:Colors.grey),),
               );
             },

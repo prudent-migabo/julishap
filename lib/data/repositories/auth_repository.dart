@@ -22,7 +22,7 @@ class AuthRepository{
 
   Future register(UserModel userModel, String password) async {
    try{
-     final user= await auth.createUserWithEmailAndPassword(email: userModel.email, password: password);
+     final user= await auth.createUserWithEmailAndPassword(email: userModel.email, password: password,);
      userModel.docId=user.user!.uid;
      await usersRef.doc(user.user?.uid).set(userModel.toMap());
    }on FirebaseAuthException catch(e){
@@ -33,6 +33,20 @@ class AuthRepository{
      print('oooooooooooo${e}');
      throw CustomError(code: 'Exception', message: e.toString(), plugin: 'Exception/Plugin');
    }
+  }
+
+  Future<UserModel> getUserDetails(String uid) async {
+    try{
+      UserModel user= await usersRef.doc(uid).get().then((doc) => UserModel.fromDoc(doc));
+      return user;
+    }on FirebaseAuthException catch(e){
+      print('ppppppppppppppp${e}');
+      throw CustomError(code: e.code, message: e.message.toString(), plugin: e.plugin);
+    }
+    catch(e){
+      print('oooooooooooo${e}');
+      throw CustomError(code: 'Exception', message: e.toString(), plugin: 'Exception/Plugin');
+    }
   }
 
   Future logout()async{

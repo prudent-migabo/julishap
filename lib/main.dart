@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthStreamCubit>(create: (context)=>AuthStreamCubit(authRepository: context.read<AuthRepository>())),
         BlocProvider<AuthSwitchCubit>(create: (context)=>AuthSwitchCubit()),
         BlocProvider(create: (context)=>AlertsCubit(alertsRepository: context.read<AlertsRepository>(),
-            uid: context.read<AuthStreamCubit>().state.uid))
+            uid: context.read<AuthStreamCubit>().state.uid, authRepository: context.read<AuthRepository>()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
