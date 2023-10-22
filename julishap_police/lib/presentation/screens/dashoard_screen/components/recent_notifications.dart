@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_police/business_logic/cubits/cubits.dart';
 import 'package:julishap_police/data/data.dart';
+import 'package:julishap_police/utils/methods_helper.dart';
 
 class RecentNofication extends StatelessWidget {
   const RecentNofication({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class RecentNofication extends StatelessWidget {
             return ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
-              subtitle: Text('Chez ${alert.senderName} le ${alert.date}'),
+              subtitle: Text('Chez ${alert.senderName} le ${MethodsHelper.timeFormatter(alert.date)}'),
               trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
                 style: TextStyle(
                     color: alert.status=='accepted'?

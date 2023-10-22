@@ -6,3 +6,4 @@ export 'map_screen/map_screen.dart';
 export 'register_screen/register_screen.dart';
 export 'home_screen/home_screen.dart';
 export 'dashoard_screen/dashboard_screen.dart';
+export 'check_role_screen/check_role_screen.dart';

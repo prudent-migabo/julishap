@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_police/config/routes.dart';
 import 'package:julishap_police/config/theming.dart';
 import 'package:julishap_police/data/data.dart';
+import 'package:julishap_police/data/repositories/user_repository.dart';
 import 'package:julishap_police/wrapper.dart';
 
 import 'business_logic/cubits/cubits.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider<MapRepository>(create: (context)=>MapRepository()),
         RepositoryProvider<AuthRepository>(create: (context)=>AuthRepository(auth: FirebaseAuth.instance)),
+        RepositoryProvider<UserRepository>(create: (context)=>UserRepository()),
         RepositoryProvider(create: (context)=>AlertsRepository()),
         BlocProvider(create: (context)=>AuthCubit(authRepository: context.read<AuthRepository>())),
         BlocProvider<AuthStreamCubit>(create: (context)=>AuthStreamCubit(authRepository: context.read<AuthRepository>())),

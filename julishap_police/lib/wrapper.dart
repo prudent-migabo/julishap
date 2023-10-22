@@ -18,7 +18,7 @@ class _WrapperState extends State<Wrapper> {
     return BlocBuilder<AuthStreamCubit,AuthStreamState>(
         builder: (context,state){
              if(state.streamStatus==AuthStreamStatus.authenticated){
-               return HomeScreen();
+               return const CheckRoleScreen();
              }
             return BlocBuilder<AuthSwitchCubit,bool>(
                 builder: (context,state){

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julishap_police/data/data.dart';
 import 'package:julishap_police/presentation/presentation.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,6 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('HOME'),
+        actions: [
+          IconButton(
+              onPressed: (){
+                context.read<AuthRepository>().logout();
+              },
+              icon: Icon(Icons.logout)),
+        ],
       ),
       drawer: const DrawerWidget(),
       body: pages[_currentIndex],

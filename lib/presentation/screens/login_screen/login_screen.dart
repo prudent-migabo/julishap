@@ -29,10 +29,10 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state){
       return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Se Connecter'),
-        ),
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text('Se Connecter'),
+        // ),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: Column(
@@ -46,6 +46,10 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Text('Se Connecter',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       TextFormField(
                         controller: _email,
                         decoration: const InputDecoration(
