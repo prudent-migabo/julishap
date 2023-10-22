@@ -42,10 +42,10 @@ class RegisterScreen extends StatelessWidget {
         },
         builder: (context, state){
       return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Creer Compte'),
-        ),
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: const Text('Creer Compte'),
+        // ),
         body: LayoutBuilder(
           builder: (context, constraints){
             return SingleChildScrollView(
