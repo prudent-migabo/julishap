@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../business_logic/cubits/cubits.dart';
 import '../../../data/data.dart';
+import '../../../utils/utils.dart';
 
 class HistoryScreen extends StatelessWidget {
   static const String routeName= '/history';
@@ -28,7 +29,7 @@ class HistoryScreen extends StatelessWidget {
 
                 return ListTile(
                   title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
-                  subtitle: Text(alert.date),
+                  subtitle: Text(MethodsHelper.timeFormatter(alert.date)),
                   trailing: Text(alert.status=='completed'?'completée':"inconnu",
                     style: TextStyle(color: Colors.green),),
                 );

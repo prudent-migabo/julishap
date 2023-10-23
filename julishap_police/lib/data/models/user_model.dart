@@ -5,6 +5,7 @@ class UserModel{
   String email;
   String phoneNumber;
   String? docId;
+  String? role;
 
 //<editor-fold desc="Data Methods">
   UserModel({
@@ -12,6 +13,7 @@ class UserModel{
     required this.email,
     required this.phoneNumber,
     this.docId,
+    this.role,
   });
 
   @override
@@ -43,12 +45,14 @@ class UserModel{
     String? email,
     String? phoneNumber,
     String? docId,
+    String? role,
   }) {
     return UserModel(
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       docId: docId ?? this.docId,
+      role: role?? this.role,
     );
   }
 
@@ -58,6 +62,7 @@ class UserModel{
       'email': this.email,
       'phoneNumber': this.phoneNumber,
       'docId': this.docId,
+      'role':'police',
     };
   }
 
@@ -69,6 +74,7 @@ class UserModel{
       email: map['email'] as String,
       phoneNumber: map['phoneNumber'] as String,
       docId: doc.id as String,
+      role: map['role'],
     );
   }
 

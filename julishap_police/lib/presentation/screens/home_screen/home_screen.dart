@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julishap_police/data/data.dart';
 import 'package:julishap_police/presentation/presentation.dart';
+
+import '../../../main.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName= '/home';
@@ -33,6 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('HOME'),
+        actions: [
+          IconButton(
+              onPressed: (){
+                context.read<AuthRepository>().logout();
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const MyApp()), (route) => false);
+              },
+              icon: Icon(Icons.logout)),
+        ],
       ),
       drawer: const DrawerWidget(),
       body: pages[_currentIndex],

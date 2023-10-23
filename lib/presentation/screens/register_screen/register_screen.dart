@@ -42,10 +42,10 @@ class RegisterScreen extends StatelessWidget {
         },
         builder: (context, state){
       return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Creer Compte'),
-        ),
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: const Text('Creer Compte'),
+        // ),
         body: LayoutBuilder(
           builder: (context, constraints){
             return SingleChildScrollView(
@@ -64,6 +64,10 @@ class RegisterScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              Text('Creer Compte',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
+                              const SizedBox(
+                                height: 30,
+                              ),
                               TextFormField(
                                 controller: _name,
                                   decoration: const InputDecoration(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/data/data.dart';
+import 'package:julishap_civil/utils/methods_helper.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const String routeName= '/notification';
@@ -27,7 +28,7 @@ class NotificationScreen extends StatelessWidget {
 
               return ListTile(
                 title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
-                subtitle: Text(alert.date),
+                subtitle: Text(MethodsHelper.timeFormatter(alert.date)),
                 trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
                   style: TextStyle(color: alert.status=='accepted'?Colors.green:Colors.grey),),
               );

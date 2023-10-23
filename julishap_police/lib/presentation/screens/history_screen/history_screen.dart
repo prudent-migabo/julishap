@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julishap_police/utils/methods_helper.dart';
 import '../../../business_logic/cubits/cubits.dart';
 import '../../../data/data.dart';
 
@@ -30,7 +31,7 @@ class HistoryScreen extends StatelessWidget {
 
                 return ListTile(
                   title: Text(alert.reason,style: const TextStyle(fontWeight: FontWeight.bold),),
-                  subtitle: Text('Chez ${alert.senderName} le ${alert.date}'),
+                  subtitle: Text('Chez ${alert.senderName} le ${MethodsHelper.timeFormatter(alert.date)}'),
                   trailing: Text(alert.status=='completed'?'completée':"inconnu",
                     style: TextStyle(color: Colors.green),),
                 );
