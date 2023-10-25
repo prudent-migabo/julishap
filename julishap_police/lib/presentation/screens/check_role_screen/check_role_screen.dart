@@ -22,7 +22,7 @@ class CheckRoleScreen extends StatelessWidget {
               }
               else{
                 return const Center(
-                  child: Text('user not allowed'),
+                  child: Text('Utilisateur non permis'),
                 );
               }
 
@@ -30,7 +30,7 @@ class CheckRoleScreen extends StatelessWidget {
             else if(snapshot.hasError){
 
               return const Center(
-                child: Text('something went wrong!'),
+                child: Text('Une erreur est survenue!'),
               );
             }
             else if(snapshot.connectionState== ConnectionState.waiting){

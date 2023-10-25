@@ -90,7 +90,7 @@ class _MapScreenState extends State<MapScreen> {
           Marker(
         point: LatLng(_locationData.latitude!,_locationData.longitude!),
               builder: (context){
-                return Icon(Icons.location_on, color: Colors.red,);
+                return const Icon(Icons.location_on, color: Colors.red,);
               }));
 
        markers.add(
@@ -214,7 +214,7 @@ class _MapScreenState extends State<MapScreen> {
                         borderRadius: BorderRadius.circular(3)
                     ),
                     child:
-                    Icon(Icons.my_location_outlined,color: Colors.white,),
+                    const Icon(Icons.my_location_outlined,color: Colors.white,),
                   ),
                 )
             ),
@@ -233,7 +233,7 @@ class _MapScreenState extends State<MapScreen> {
                   builder: (context,state){
                     AlertModel alert=state.notificationAlerts.firstWhere((alert) => widget.alert.docId==alert.docId);
                     if(state.status==AlertsStatus.loading){
-                      return Center(child: Text('loading...'));
+                      return const Center(child: Text('Patientez...'));
                     }
                   return Container(
                       color: Colors.white,
@@ -243,12 +243,12 @@ class _MapScreenState extends State<MapScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                      child: Text('Acceptee par ${alert.policeName}')
+                                      child: Text('Acceptée par ${alert.policeName}')
                                   ),
                                   ElevatedButton(
                                       onPressed: (){
 
-                                  }, child: Text('decliner'))
+                                  }, child: Text('Decliner'))
                                 ],
                               )
                               :
@@ -257,7 +257,7 @@ class _MapScreenState extends State<MapScreen> {
                           Row(
                             children: [
                               Expanded(
-                                  child: Text('declinee par ${alert.policeName}')
+                                  child: Text('declinée par ${alert.policeName}')
                               ),
                               // ElevatedButton(
                               //     onPressed: (){
@@ -301,7 +301,7 @@ class _MapScreenState extends State<MapScreen> {
                                   ));
                                   Navigator.pop(context);
                                 },
-                                child: Text('decliner')),
+                                child: Text('Decliner')),
                           ),
                         ],
                       )

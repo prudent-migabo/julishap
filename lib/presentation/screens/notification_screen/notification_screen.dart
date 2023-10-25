@@ -19,7 +19,7 @@ class NotificationScreen extends StatelessWidget {
 
         return  state.notificationAlerts.length==0?
             Center(
-              child: Text('Empty'),
+              child: Text('Vide'),
             )
             :ListView.builder(
             itemBuilder: (
@@ -27,7 +27,7 @@ class NotificationScreen extends StatelessWidget {
               AlertModel alert= state.notificationAlerts[index];
 
               return ListTile(
-                title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
+                title: Text(alert.reason,style: const TextStyle(fontWeight: FontWeight.bold),),
                 subtitle: Text(MethodsHelper.timeFormatter(alert.date)),
                 trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
                   style: TextStyle(color: alert.status=='accepted'?Colors.green:Colors.grey),),

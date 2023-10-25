@@ -18,7 +18,7 @@ class DrawerWidget extends StatelessWidget {
             radius: 40,
           ),
           SizedBox(height: 5,),
-          Text('Name',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+          Text('Noms',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
           Divider(),
           ListTile(
             leading: Icon(Icons.settings),

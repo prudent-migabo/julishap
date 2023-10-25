@@ -19,11 +19,11 @@ class HistoryScreen extends StatelessWidget {
 
           return state.notificationAlerts.length==0?
           const Center(
-            child: Text('Empty'),
+            child: Text('Vide'),
           )
               :ListView.separated(
               separatorBuilder: (context, index){
-                return SizedBox(height: 5,);
+                return const SizedBox(height: 5,);
               },
               itemBuilder: (
                   context, index){
@@ -33,7 +33,7 @@ class HistoryScreen extends StatelessWidget {
                   title: Text(alert.reason,style: const TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text('Chez ${alert.senderName} le ${MethodsHelper.timeFormatter(alert.date)}'),
                   trailing: Text(alert.status=='completed'?'completée':"inconnu",
-                    style: TextStyle(color: Colors.green),),
+                    style: const TextStyle(color: Colors.green),),
                 );
               },
               itemCount: state.historyAlerts.length);

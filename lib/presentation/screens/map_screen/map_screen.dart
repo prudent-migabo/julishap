@@ -71,7 +71,7 @@ class _MapScreenState extends State<MapScreen> {
        markers.add(
            Marker(point: LatLng(_locationData.latitude!,_locationData.longitude!),
            builder: (context){
-             return Icon(Icons.location_on, color: Colors.red,);
+             return const Icon(Icons.location_on, color: Colors.red,);
            }));
     });
 
@@ -127,7 +127,7 @@ class _MapScreenState extends State<MapScreen> {
                     borderRadius: BorderRadius.circular(3)
                   ),
                   child:
-                  Icon(Icons.my_location_outlined,color: Colors.white,),
+                  const Icon(Icons.my_location_outlined,color: Colors.white,),
                 ),
               )
           ),
@@ -145,7 +145,7 @@ class _MapScreenState extends State<MapScreen> {
                         arguments: {"location": LatLng(_locationData.latitude!,_locationData.longitude!)});
 
                   },
-                  child: Text('Creer L\'alerte'),
+                  child: const Text('Créer alerte'),
                 ),
               ))
 

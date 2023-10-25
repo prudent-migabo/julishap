@@ -19,8 +19,8 @@ class HistoryScreen extends StatelessWidget {
         builder: (context, state){
 
           return state.notificationAlerts.length==0?
-          Center(
-            child: Text('Empty'),
+          const Center(
+            child: Text('Vide'),
           )
               :ListView.builder(
               itemBuilder: (
@@ -31,7 +31,7 @@ class HistoryScreen extends StatelessWidget {
                   title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text(MethodsHelper.timeFormatter(alert.date)),
                   trailing: Text(alert.status=='completed'?'completée':"inconnu",
-                    style: TextStyle(color: Colors.green),),
+                    style: const TextStyle(color: Colors.green),),
                 );
               },
               itemCount: state.historyAlerts.length);

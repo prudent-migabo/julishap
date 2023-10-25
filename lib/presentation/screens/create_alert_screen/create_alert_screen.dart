@@ -20,7 +20,7 @@ class CreateAlerteScreen extends StatefulWidget {
 
 class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
 
-  List<String> alerts=["Vol","Kidnapping","Viol", "Tentative de Meurtre"," Abus"];
+  List<String> alerts=["Vol","Kidnapping","Viol", "Tentative de meurtre"," Abus"];
   String alertName='Vol';
 
 
@@ -38,14 +38,14 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
           errorDialog(context, state.customError!);
         }
         if(state.status==AlertsStatus.success){
-           Fluttertoast.showToast(msg: 'creer avec success aller a la notification',
+           Fluttertoast.showToast(msg: 'Créer avec succès allez à la notification',
                backgroundColor: Colors.green, toastLength: Toast.LENGTH_SHORT,textColor: Colors.white);
         }
       },
       builder: (context, state){
       return Scaffold(
         appBar: AppBar(
-          title: Text('Creer Alerte'),
+          title: Text('Créer Alerte'),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -61,7 +61,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
               //   ),
               // ),
 
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
 
               DropdownButtonFormField(
                   decoration: const InputDecoration(
@@ -72,9 +72,9 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                   items: alerts.map((e) => DropdownMenuItem(
                       value: e,
                       child: Text(e))).toList(), onChanged: onChangeAlert),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 16)),
+                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
                   onPressed: state.status==AlertsStatus.loading?null:(){
                     context.read<AlertsCubit>().sendAlert(AlertModel(
                         senderName: '',
@@ -84,7 +84,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                         status: 'pending',
                         date: DateTime.now().toIso8601String()));
                   }
-                  , child: Text(state.status==AlertsStatus.loading?'Loading...':'Envoyer'))
+                  , child: Text(state.status==AlertsStatus.loading?'Patientez...':'Envoyer'))
 
             ],
           ),

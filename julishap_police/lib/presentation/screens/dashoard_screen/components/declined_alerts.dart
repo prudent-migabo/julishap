@@ -22,7 +22,7 @@ class DeclinedAlerts extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(length,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32),),
-                const Text('Alertes  refusees')
+                const Text('Alertes  refusées')
               ],
             ),
           ),
