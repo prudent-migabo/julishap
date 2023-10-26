@@ -22,7 +22,7 @@ class CompletedAlerts extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(length,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32),),
-                Text('Alertes  Completees')
+                const Text('Alertes  Completées')
               ],
             ),
           ),

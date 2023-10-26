@@ -19,8 +19,8 @@ class NotificationScreen extends StatelessWidget {
         builder: (context, state){
 
         return  state.notificationAlerts.length==0?
-            Center(
-              child: Text('Empty'),
+            const Center(
+              child: Text('Vide'),
             )
             :ListView.separated(
           padding: EdgeInsets.only(left: 20, right: 20,top: 15),
@@ -36,8 +36,8 @@ class NotificationScreen extends StatelessWidget {
                   Navigator.pushNamed(context, MapScreen.routeName,arguments: alert);
                 },
                 child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                  title: Text(alert.reason,style: TextStyle(fontWeight: FontWeight.bold),),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                  title: Text(alert.reason,style: const TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text('Chez ${alert.senderName} le ${MethodsHelper.timeFormatter(alert.date)}'),
                   trailing: Text(alert.status=='pending'?'en attente':alert.status=='accepted'?"acceptée":"declinée",
                     style: TextStyle(

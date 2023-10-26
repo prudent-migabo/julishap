@@ -3,14 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/utils/utils.dart';
 import '../../../business_logic/cubits/cubits.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String routeName= '/login';
   LoginScreen({Key? key}) : super(key: key);
 
-  GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  TextEditingController _email= TextEditingController();
-  TextEditingController _password= TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+
+  final TextEditingController _email= TextEditingController();
+  final TextEditingController _password= TextEditingController();
 
   void _onSubmit(BuildContext context){
     if(!_formKey.currentState!.validate()){
@@ -46,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Se Connecter',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
+                      Text('Se connecter',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
                       const SizedBox(
                         height: 30,
                       ),
@@ -62,22 +67,22 @@ class LoginScreen extends StatelessWidget {
                             return 'required';
                           }
                           if(!val.contains('@')){
-                            return 'invalid email';
+                            return 'Email invalide';
                           }
                         },
                       ),
-                      SizedBox(height: 12,),
+                      const SizedBox(height: 12,),
                       TextFormField(
                         obscureText: true,
                         controller: _password,
                         decoration: const InputDecoration(
                           isDense:true,
-                          hintText: 'Password',
-                          labelText: 'Password',
+                          hintText: 'Mot de passe',
+                          labelText: 'Mot de passe',
                         ),
                         validator: (val){
                       if(val!.isEmpty|| val.trim().isEmpty){
-                      return 'required';
+                      return 'Champ obligatoire';
                         }
                        }
                       ),
@@ -88,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                           onPressed: state.status==AuthStatus.loading?null:(){
                             _onSubmit(context);
                           },
-                          child: Text(state.status==AuthStatus.loading?"Loading...":'Se connecter')),
+                          child: Text(state.status==AuthStatus.loading?"Patientez...":'Se connecter')),
 
                     ],
                   ),
@@ -96,13 +101,13 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Aucun Compte ?'),
-                  SizedBox(width: 8,),
+                 const  Text('Aucun Compte ?'),
+                 const SizedBox(width: 8,),
                   GestureDetector(
                       onTap: (){
                         context.read<AuthSwitchCubit>().toggle(false);
                       },
-                      child: Text('Creer',
+                      child: Text('Créer',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold),)),

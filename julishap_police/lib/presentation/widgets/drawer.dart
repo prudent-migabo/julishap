@@ -18,11 +18,11 @@ class DrawerWidget extends StatelessWidget {
             radius: 40,
           ),
           SizedBox(height: 5,),
-          Text('Name',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+          Text('Nom',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
           Divider(),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('parametres'),
+            title: Text('Parametres'),
           ),
           ListTile(
             leading: Icon(Icons.language),

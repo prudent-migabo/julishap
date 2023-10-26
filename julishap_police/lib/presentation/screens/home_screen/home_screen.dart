@@ -36,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('HOME'),
+        title: const Text('ACCEUIL'),
         actions: [
           IconButton(
               onPressed: (){
                 context.read<AuthRepository>().logout();
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const MyApp()), (route) => false);
               },
-              icon: Icon(Icons.logout)),
+              icon: const Icon(Icons.logout)),
         ],
       ),
       drawer: const DrawerWidget(),
@@ -56,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
         showUnselectedLabels: false,
         selectedItemColor: Theme.of(context).primaryColor,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notification"),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Acceuil'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notifications"),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Historique'),
         ],
       ),
     );

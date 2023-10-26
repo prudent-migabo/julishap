@@ -6,19 +6,22 @@ import 'package:julishap_police/business_logic/cubits/cubits.dart';
 import 'package:julishap_police/data/data.dart';
 import '../../../utils/utils.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   static const String routeName= '/register';
 
   RegisterScreen({Key? key}) : super(key: key);
 
-  GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
 
-  TextEditingController _email= TextEditingController();
-  TextEditingController _password= TextEditingController();
-  TextEditingController _name= TextEditingController();
-  TextEditingController _phoneNumber= TextEditingController();
+class _RegisterScreenState extends State<RegisterScreen> {
+  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
 
-
+  final TextEditingController _email= TextEditingController();
+  final TextEditingController _password= TextEditingController();
+  final TextEditingController _name= TextEditingController();
+  final TextEditingController _phoneNumber= TextEditingController();
 
   void _onSubmit(BuildContext context){
     if(!_formKey.currentState!.validate()){
@@ -64,7 +67,7 @@ class RegisterScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text('Creer Compte',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
+                              Text('Créer Compte',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
                               const SizedBox(
                                 height: 30,
                               ),
@@ -76,7 +79,7 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                   validator: (val){
                                     if(val!.isEmpty|| val.trim().isEmpty){
-                                      return 'required';
+                                      return 'Champ obligatoire';
                                     }
                                   }
                               ),
@@ -92,7 +95,7 @@ class RegisterScreen extends StatelessWidget {
                                     return 'required';
                                   }
                                   if(!val.contains('@')){
-                                    return 'invalid email';
+                                    return 'Email invalide';
                                   }
                                 },
                               ),
@@ -100,40 +103,40 @@ class RegisterScreen extends StatelessWidget {
                               TextFormField(
                                   controller: _phoneNumber,
                                   decoration: const InputDecoration(
-                                    hintText: 'phone Number',
-                                    labelText: 'phone Number',
+                                    hintText: 'Numéro de téléphone',
+                                    labelText: 'Numéro de téléphone',
                                   ),
                                   validator: (val){
                                     if(val!.isEmpty|| val.trim().isEmpty){
-                                      return 'required';
+                                      return 'Champ obligatoire';
                                     }
                                   }
                               ),
-                              SizedBox(height: 8,),
+                              const SizedBox(height: 8,),
                               TextFormField(
                                   obscureText: true,
                                   controller: _password,
                                   decoration: const InputDecoration(
-                                    hintText: 'password',
-                                    labelText: 'password',
+                                    hintText: 'Mot de passe',
+                                    labelText: 'Mot de passe',
                                   ),
                                   validator: (val){
                                     if(val!.isEmpty|| val.trim().isEmpty){
-                                      return 'required';
+                                      return 'Champ obligatoire';
                                     }
                                     if(val.trim().length<6){
-                                      return "too short";
+                                      return "Trop court";
                                     }
                                   }
                               ),
-                              SizedBox(height: 8,),
+                              const SizedBox(height: 8,),
 
                               ElevatedButton(
-                                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
+                                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 18)),
                                   onPressed:state.status==AuthStatus.loading?null:(){
                                     _onSubmit(context);
                                   },
-                                  child: Text(state.status==AuthStatus.loading?"loading...":'creer'))
+                                  child: Text(state.status==AuthStatus.loading?"Patientez...":'Créer'))
                             ],
                           ),
                         ),
@@ -147,7 +150,7 @@ class RegisterScreen extends StatelessWidget {
                               onTap: (){
                                 context.read<AuthSwitchCubit>().toggle(true);
                               },
-                              child: Text('Connectez Vous',
+                              child: Text('Connectez-vous',
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold),)),

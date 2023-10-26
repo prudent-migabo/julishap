@@ -38,7 +38,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
           errorDialog(context, state.customError!);
         }
         if(state.status==AlertsStatus.success){
-           Fluttertoast.showToast(msg: 'creer avec success aller a la notification',
+           Fluttertoast.showToast(msg: 'Creer avec success allez à la notification',
                backgroundColor: Colors.green, toastLength: Toast.LENGTH_SHORT,textColor: Colors.white);
         }
       },
@@ -46,7 +46,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Creer Alerte'),
+          title: Text('Créer Alerte'),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -62,19 +62,19 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
               //   ),
               // ),
 
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
 
               DropdownButtonFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     isDense:true,
                   ),
                   value: alertName,
                   items: alerts.map((e) => DropdownMenuItem(
                       value: e,
                       child: Text(e))).toList(), onChanged: onChangeAlert),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 18)),
+                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 18)),
                   onPressed: state.status==AlertsStatus.loading?null:(){
                     // context.read<AlertsCubit>().sendAlert(AlertModel(
                     //     uid: context.read<AuthStreamCubit>().state.uid,
@@ -83,7 +83,7 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                     //     status: 'pending',
                     //     date: DateTime.now().toIso8601String()));
                   }
-                  , child: Text(state.status==AlertsStatus.loading?'loading...':'Envoyer'))
+                  , child: Text(state.status==AlertsStatus.loading?'Patientez...':'Envoyer'))
 
             ],
           ),

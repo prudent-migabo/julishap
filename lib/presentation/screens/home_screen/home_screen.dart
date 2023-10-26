@@ -40,9 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: (){
             context.read<AuthCubit>().signOut();
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const MyApp()), (route) => false);
-          }, icon: Icon(Icons.logout))
+          }, icon: const Icon(Icons.logout))
         ],
-        title: const Text('HOME'),
+        title: const Text('ACCEUIL'),
       ),
       drawer: const DrawerWidget(),
       body: pages[_currentIndex],
@@ -54,9 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
         showSelectedLabels: true,
         showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notification"),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Accueil'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notifications"),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Historique'),
         ],
       ),
     );
