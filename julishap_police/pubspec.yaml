@@ -47,6 +47,7 @@ dependencies:
   fluttertoast:
   dio:
   flutter_map_location_marker:
+  badges:
 
 dev_dependencies:
   flutter_test:

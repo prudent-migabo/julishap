@@ -6,7 +6,7 @@ import '../../utils/constants.dart';
 class AlertsRepository{
 
   Stream<List<AlertModel>> notificationAlerts(String uid){
-    return alertsRef.where('status', isNotEqualTo: 'completed')
+    return alertsRef.where('status', isNotEqualTo: 'completed').orderBy('status',descending: true).orderBy('date',descending: true)
         .snapshots().map((snap) =>snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
   }
 
@@ -16,7 +16,7 @@ class AlertsRepository{
   }
 
   Stream<List<AlertModel>> historyAlerts(String uid){
-    return alertsRef.where('status', isEqualTo: 'completed')
+    return alertsRef.where('status', isEqualTo: 'completed').orderBy('date',descending: true)
         .snapshots().map((snap) => snap.docs.map((doc) => AlertModel.fromDoc(doc)).toList());
   }
 
