@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                builder: (context, state) {
                   List<AlertModel> alerts= state.notificationAlerts.where((e) =>e.status=='pending').toList();
                     return badges.Badge(
-                      badgeContent: Text(alerts.length.toString()),
+                      badgeContent: Text(alerts.length.toString(),style: TextStyle(color: Colors.white,fontSize: 9),),
                       child: Icon(Icons.notifications_none),
                     );
               },

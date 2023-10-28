@@ -17,7 +17,6 @@ class NotificationScreen extends StatelessWidget {
 
       },
         builder: (context, state){
-
         return  state.notificationAlerts.length==0?
             const Center(
               child: Text('Vide'),
