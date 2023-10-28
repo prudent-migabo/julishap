@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julishap_police/business_logic/cubits/alerts_cubit/alerts_cubit.dart';
 import 'package:julishap_police/data/data.dart';
 import 'package:julishap_police/presentation/presentation.dart';
+import 'package:badges/badges.dart' as badges;
 
 import '../../../main.dart';
 
@@ -55,9 +57,17 @@ class _HomeScreenState extends State<HomeScreen> {
         showSelectedLabels: true,
         showUnselectedLabels: false,
         selectedItemColor: Theme.of(context).primaryColor,
-        items: const [
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Acceuil'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none),label: "Notifications"),
+          BottomNavigationBarItem(icon: BlocBuilder<AlertsCubit, AlertsState>(
+               builder: (context, state) {
+                  List<AlertModel> alerts= state.notificationAlerts.where((e) =>e.status=='pending').toList();
+                    return badges.Badge(
+                      badgeContent: Text(alerts.length.toString()),
+                      child: Icon(Icons.notifications_none),
+                    );
+              },
+           ),label: "Notifications"),
           BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Historique'),
         ],
       ),
