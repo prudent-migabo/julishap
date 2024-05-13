@@ -8,12 +8,15 @@ import 'package:julishap_civil/data/data.dart';
 import 'package:julishap_civil/wrapper.dart';
 
 import 'business_logic/cubits/cubits.dart';
+import 'firebase_options.dart';
 
 
 
 Future<void> main() async {
  await WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

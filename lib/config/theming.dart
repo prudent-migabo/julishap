@@ -36,7 +36,7 @@ class AppThemeData {
     brightness: Brightness.light,
     primaryColor: primaryColor,
     scaffoldBackgroundColor: secondaryColor,
-    fontFamily: 'Questrial',
+    fontFamily: 'Inter',
     iconTheme: const IconThemeData(color: iconPrimary),
     textTheme: const TextTheme(
       displaySmall: TextStyle(
@@ -62,7 +62,7 @@ class AppThemeData {
     ),
     colorScheme: const ColorScheme.light().copyWith(background: backgroundWhite),
     inputDecorationTheme:  InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(vertical: 22, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 15),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(cornerRadiusTextFields),
         borderSide: const BorderSide(color: backgroundGrey),
@@ -85,16 +85,17 @@ class AppThemeData {
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
       titleTextStyle: TextStyle(
-        fontFamily: 'Questrial',
+        fontFamily: 'Inter',
         fontSize: 20,
         fontWeight: FontWeight.w600,
       ),
     ),
-    elevatedButtonTheme:  const ElevatedButtonThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(buttonPrimary),
         elevation: MaterialStatePropertyAll(2.0),
       ),
+
     ),
   );
 }

@@ -145,7 +145,7 @@ class _MapScreenState extends State<MapScreen> {
                         arguments: {"location": LatLng(_locationData.latitude!,_locationData.longitude!)});
 
                   },
-                  child: const Text('Créer alerte'),
+                  child: const Text('Créer alerte', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                 ),
               ))
 

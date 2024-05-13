@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/data/data.dart';
 import '../../../utils/utils.dart';
+import '../../widgets/custom_button.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static const String routeName= '/register';
+  static const String routeName = '/register';
 
   RegisterScreen({Key? key}) : super(key: key);
 
@@ -16,127 +17,159 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _email= TextEditingController();
-  final TextEditingController _password= TextEditingController();
-  final TextEditingController _name= TextEditingController();
-  final TextEditingController _phoneNumber= TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _phoneNumber = TextEditingController();
 
-  void _onSubmit(BuildContext context){
-    if(!_formKey.currentState!.validate()){
+  void _onSubmit(BuildContext context) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
     context.read<AuthCubit>().register(
         UserModel(
-        name: _name.text,
-            email: _email.text,
-            phoneNumber: _phoneNumber.text,
-            ), _password.text);
+          name: _name.text,
+          email: _email.text,
+          phoneNumber: _phoneNumber.text,
+        ),
+        _password.text);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit,AuthState>(
-        listener: (context,state){
-          if(state.status==AuthStatus.error){
-            errorDialog(context, state.error!);
-          }
-        },
-        builder: (context, state){
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      if (state.status == AuthStatus.error) {
+        errorDialog(context, state.error!);
+      }
+    }, builder: (context, state) {
       return Scaffold(
         // appBar: AppBar(
         //   centerTitle: true,
         //   title: const Text('Creer Compte'),
         // ),
         body: LayoutBuilder(
-          builder: (context, constraints){
+          builder: (context, constraints) {
             return SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                constraints: BoxConstraints.tightFor(height: max(500, constraints.maxHeight)),
+                constraints: BoxConstraints.tightFor(
+                    height: max(500, constraints.maxHeight)),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     children: [
                       Expanded(
-                        child:
-                        Padding(
+                        child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text('Créer Compte',style: Theme.of(context).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),),
+                              Text(
+                                'Créer Compte',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
                               const SizedBox(
                                 height: 30,
                               ),
                               TextFormField(
-                                controller: _name,
+                                  controller: _name,
                                   decoration: const InputDecoration(
                                     hintText: 'Nom',
                                     labelText: 'Nom',
                                   ),
-                                  validator: (val){
-                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                  validator: (val) {
+                                    if (val!.isEmpty || val.trim().isEmpty) {
                                       return 'Champ obligatoire';
                                     }
-                                  }
+                                  }),
+                              SizedBox(
+                                height: 8,
                               ),
-                              SizedBox(height: 8,),
                               TextFormField(
                                 controller: _email,
                                 decoration: const InputDecoration(
                                   hintText: 'Email',
                                   labelText: 'Email',
                                 ),
-                                validator: (val){
-                                  if(val!.isEmpty|| val.trim().isEmpty){
+                                validator: (val) {
+                                  if (val!.isEmpty || val.trim().isEmpty) {
                                     return 'required';
                                   }
-                                  if(!val.contains('@')){
+                                  if (!val.contains('@')) {
                                     return 'Email invalide';
                                   }
                                 },
                               ),
-                              const SizedBox(height: 8,),
+                              const SizedBox(
+                                height: 8,
+                              ),
                               TextFormField(
                                   controller: _phoneNumber,
                                   decoration: const InputDecoration(
                                     hintText: 'Numéro de téléphone',
                                     labelText: 'Numéro de téléphone',
                                   ),
-                                  validator: (val){
-                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                  validator: (val) {
+                                    if (val!.isEmpty || val.trim().isEmpty) {
                                       return 'required';
                                     }
-                                  }
+                                  }),
+                              const SizedBox(
+                                height: 8,
                               ),
-                              const SizedBox(height: 8,),
                               TextFormField(
-                                obscureText: true,
+                                  obscureText: true,
                                   controller: _password,
                                   decoration: const InputDecoration(
                                     hintText: 'Mot de passe',
                                     labelText: 'Mot de passe',
                                   ),
-                                  validator: (val){
-                                    if(val!.isEmpty|| val.trim().isEmpty){
+                                  validator: (val) {
+                                    if (val!.isEmpty || val.trim().isEmpty) {
                                       return 'Champ obligatoire';
                                     }
-                                    if(val.trim().length<6){
+                                    if (val.trim().length < 6) {
                                       return "Tres court";
                                     }
-                                  }
+                                  }),
+                              const SizedBox(
+                                height: 20,
                               ),
-                              const SizedBox(height: 8,),
-
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 18)),
-                                  onPressed:state.status==AuthStatus.loading?null:(){
-                                    _onSubmit(context);
-                                  },
-                                  child: Text(state.status==AuthStatus.loading?"Patientez...":'Créer'))
+                              CustomButton(
+                                onPressed: state.status == AuthStatus.loading
+                                    ? (){}
+                                    : () {
+                                  _onSubmit(context);
+                                },
+                                text:
+                                state.status == AuthStatus.loading
+                                    ? "Patientez..."
+                                    : 'Créer',
+                              ),
+                              //
+                              // ElevatedButton(
+                              //     style: ElevatedButton.styleFrom(
+                              //         padding: const EdgeInsets.symmetric(
+                              //             vertical: 18)),
+                              //     onPressed: state.status == AuthStatus.loading
+                              //         ? null
+                              //         : () {
+                              //             _onSubmit(context);
+                              //           },
+                              //     child: Text(state.status == AuthStatus.loading
+                              //         ? "Patientez..."
+                              //         : 'Créer',
+                              //       style: const TextStyle(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ))
                             ],
                           ),
                         ),
@@ -145,15 +178,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text('Vous avez déjà un compte :'),
-                          const SizedBox(width: 8,),
+                          const SizedBox(
+                            width: 8,
+                          ),
                           GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 context.read<AuthSwitchCubit>().toggle(true);
                               },
-                              child: Text('Connectez-vous',
+                              child: Text(
+                                'Connectez-vous',
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.bold),)),
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ],
                       )
                     ],

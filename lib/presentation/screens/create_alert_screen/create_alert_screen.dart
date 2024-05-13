@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:julishap_civil/business_logic/cubits/cubits.dart';
 import 'package:julishap_civil/data/data.dart';
+import 'package:julishap_civil/presentation/widgets/custom_button.dart';
 import 'package:julishap_civil/utils/error_dialog.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -20,8 +21,8 @@ class CreateAlerteScreen extends StatefulWidget {
 
 class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
 
-  List<String> alerts=["Vol","Kidnapping","Viol", "Tentative de meurtre"," Abus"];
-  String alertName='Vol';
+  List<String> alerts=["Kidnapping","Vol", "Tentative de meurtre","Abus", "Viol", "Agression", "Fraude", "Corruption", "Violation des droits humains"];
+  String alertName='Kidnapping';
 
 
   void onChangeAlert(String? alert){
@@ -45,10 +46,15 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
       builder: (context, state){
       return Scaffold(
         appBar: AppBar(
-          title: Text('Créer Alerte'),
+          leading: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back, color: Colors.white,),),
+          title: const Text('Créer alerte'),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -71,21 +77,20 @@ class _CreateAlerteScreenState extends State<CreateAlerteScreen> {
                   value: alertName,
                   items: alerts.map((e) => DropdownMenuItem(
                       value: e,
-                      child: Text(e))).toList(), onChanged: onChangeAlert),
+                      child: Text(e, style: const TextStyle(fontSize: 14),))).toList(), onChanged: onChangeAlert),
               const SizedBox(height: 10,),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 16)),
-                  onPressed: state.status==AlertsStatus.loading?null:(){
-                    context.read<AlertsCubit>().sendAlert(AlertModel(
-                        senderName: '',
-                        uid: context.read<AuthStreamCubit>().state.uid,
-                        location: GeoPoint(widget.location.latitude,widget.location.longitude),
-                        reason: alertName,
-                        status: 'pending',
-                        date: DateTime.now().toIso8601String()));
-                  }
-                  , child: Text(state.status==AlertsStatus.loading?'Patientez...':'Envoyer'))
-
+              CustomButton(
+                onPressed: state.status==AlertsStatus.loading? (){} : (){
+                  context.read<AlertsCubit>().sendAlert(AlertModel(
+                      senderName: '',
+                      uid: context.read<AuthStreamCubit>().state.uid,
+                      location: GeoPoint(widget.location.latitude,widget.location.longitude),
+                      reason: alertName,
+                      status: 'pending',
+                      date: DateTime.now().toIso8601String()));
+                },
+                text: state.status==AlertsStatus.loading?'Patientez...':'Envoyer',
+              ),
             ],
           ),
         ),

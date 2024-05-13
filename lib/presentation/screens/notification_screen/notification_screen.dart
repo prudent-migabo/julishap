@@ -18,10 +18,11 @@ class NotificationScreen extends StatelessWidget {
         builder: (context, state){
 
         return  state.notificationAlerts.length==0?
-            Center(
+            const Center(
               child: Text('Vide'),
             )
             :ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             itemBuilder: (
                 context, index){
               AlertModel alert= state.notificationAlerts[index];
